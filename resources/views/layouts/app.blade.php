@@ -52,14 +52,16 @@
                     <a href="{{ route('patients.index') }}" class="nav-link"><i class="ti-files"></i>Patienten</a>
                 </li>
                 @else
-                <li class="nav-item">
-                    <a href="{{ route('report.index') }}" class="nav-link"><i class="ti-files"></i>Meine Befunde</a>
-                </li>
+                @if (Auth::user() && Auth::user()->patientdata)
+                    <li class="nav-item">
+                        <a href="{{ route('report.index') }}" class="nav-link"><i class="ti-files"></i>Meine Befunde</a>
+                    </li>
+                @endif
                 <li><a href="{{ route('patientdata.show') }}"><i class="ti-clipboard"></i>Patientendaten</a></li>
                 @if (Auth::user() && Auth::user()->patientdata)
                     <li><a href="{{ route('anamnesis.show') }}"><i class="ti-pencil-alt"></i>Anamneseformular</a></li>
+                    <li><a href="{{ route('report.create') }}"><i class="ti-export"></i>Befund hochladen</a></li>
                 @endif
-                <li><a href="{{ route('report.create') }}"><i class="ti-export"></i>Befund hochladen</a></li>
                 @endrole
             </ul>
 

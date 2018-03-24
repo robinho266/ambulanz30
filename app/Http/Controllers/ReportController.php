@@ -34,6 +34,12 @@ class ReportController extends Controller
      */
     public function create()
     {
+        $patientdata = Auth::user()->patientdata;
+
+        if (!$patientdata) {
+            return redirect('patientdata/create');
+        }
+
         return view('report.create');
     }
 
@@ -46,6 +52,10 @@ class ReportController extends Controller
     public function store(StoreReport $request)
     {
         $patientdata = Auth::user()->patientdata;
+
+        if (!$patientdata) {
+            return redirect('patientdata/create');
+        }
 
         $folder = $patientdata->firstname . '_' . $patientdata->lastname;
 
