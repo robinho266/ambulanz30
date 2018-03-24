@@ -35,8 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/anamnesis', 'AnamnesisController@store')->name('anamnesis.store');
 	Route::post('/anamnesis/update', 'AnamnesisController@update')->name('anamnesis.update');
 
-
-
 	Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
 		Route::get('/patients', 'PatientController@index')->name('patients.index');
 		Route::get('/patient/{patient}', 'PatientController@show')->name('patient.show');
@@ -45,5 +43,3 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('auth/token','Auth\AuthController@getToken');
 	Route::post('auth/token','Auth\AuthController@postToken');
 });
-
-
