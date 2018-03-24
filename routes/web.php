@@ -24,9 +24,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/patientdata/edit', 'PatientdataController@edit')->name('patientdata.edit');
 	Route::post('/patientdata', 'PatientdataController@store')->name('patientdata.store');
 	Route::post('/patientdata/update', 'PatientdataController@update')->name('patientdata.update');
-	Route::get('/upload', 'DataUploadController@showUpload')->name('dataupload.show');
-	Route::post('/upload', 'DataUploadController@upload')->name('dataupload.upload');
-	Route::post('/store', 'DataUploadController@store')->name('dataupload.store');
+
+	Route::resource('/report', 'ReportController');
 
 	// Route::get('/patientdata', 'PatientdataController@show')->name('patientdata.show');
 	Route::get('/anamnesis', 'AnamnesisController@show')->name('anamnesis.show');

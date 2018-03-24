@@ -8,9 +8,22 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+.mutable {
+	#humanBody {
+		g {
+			path:hover {
+				fill: #ddd;
+			}
+		}
+	}
+}
+
 #humanBody {
+	max-width: 100%;
+	height: 100%;
+
 	g {
-		path.active, path:hover {
+		path.active {
 			fill: #ddd;
 		}
 	}
@@ -37,4 +50,8 @@
     		margin-right: 20px;
     	}
 	}
+}
+
+.localisation {
+	max-width: 200px;
 }

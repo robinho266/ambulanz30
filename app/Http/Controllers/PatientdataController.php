@@ -58,6 +58,10 @@ class PatientdataController extends Controller
      */
     public function show()
     {
+        if (!Auth::user()->patientdata) {
+            return redirect('patientdata/create');
+        }
+
         $patientdata = Auth::user()->patientdata()->first();
 
         return view('patientdata.show')->with([

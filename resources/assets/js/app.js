@@ -13,24 +13,26 @@ $(function() {
 		});
 
 		$humanBody.on('click', 'path', function () {
-			let part = $(this).attr('id');
-			let index = localisation.indexOf(part);
+			if ($(this).parents('.mutable').length > 0) {
+				let part = $(this).attr('id');
+				let index = localisation.indexOf(part);
 
-			if (index !== -1) {
-				localisation.splice(index, 1);
-			} else {
-				localisation.push(part);
+				if (index !== -1) {
+					localisation.splice(index, 1);
+				} else {
+					localisation.push(part);
+				}
+
+				$(this).toggleClass('active');
+
+				/*if (localisation.length > 0) {
+					$input.val(localisation.join());
+				} else {
+					$input.val(localisation[0]);
+				}*/
+
+				$input.val(localisation.length > 0 ? localisation.join() : localisation[0]);
 			}
-
-			$(this).toggleClass('active');
-
-			/*if (localisation.length > 0) {
-				$input.val(localisation.join());
-			} else {
-				$input.val(localisation[0]);
-			}*/
-
-			$input.val(localisation.length > 0 ? localisation.join() : localisation[0]);
 		});
 	}
 });

@@ -14,7 +14,7 @@ class Anamnesis extends Model
      * @var array
      */
     protected $fillable = [
-        'spine_op', 'medicine', 'localisation', 'pain_intensity', 'pain_duration', 'additional_pain_location', 'walking_distance'                
+        'spine_op', 'medicine', 'localisation', 'pain_intensity', 'pain_duration', 'additional_pain_location', 'walking_distance'
     ];
 
     protected $table = 'anamnesis';
@@ -22,10 +22,5 @@ class Anamnesis extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
-    }
-
-    public function reports()
-    {
-        return $this->hasMany('App\Report');
     }
 }

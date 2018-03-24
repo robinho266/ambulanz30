@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-use App\User;
+use Auth;
 
-class PatientController extends Controller
+use App\Http\Requests\StoreReport;
+
+use App\Report;
+
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +20,11 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = User::doesnthave('roles')->has('patientdata')->get();
+        $reports = Auth::user()->reports;
 
-        return view('patient.index')->with([
-            'patients' => $patients
+        return view('report.index')->with([
+            'reports' => $reports
         ]);
-
-        $patients = User::doesnthave('roles')->has('anamnesis')->get();
-
-        return view('patient.index')->with([
-            'anamneses' => $anamneses
-        ]);
-
     }
 
     /**
@@ -36,7 +34,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        //
+        return view('report.create');
     }
 
     /**
@@ -45,9 +43,24 @@ class PatientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreReport $request)
     {
-        //
+        $patientdata = Auth::user()->patientdata;
+
+        $folder = $patientdata->firstname . '_' . $patientdata->lastname;
+
+        $file = $request->file('file');
+
+        $report = Report::create([
+            'name' => $request->get('name'),
+            'file' => $file->getClientOriginalName(),
+            'user_id' => Auth::user()->id,
+            'hash' => $file->hashName()
+        ]);
+
+        $file->store($folder, 'public');
+
+        return redirect('report');
     }
 
     /**
@@ -58,12 +71,7 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        $patient = User::find($id);
-
-        return view('patient.show')->with([
-            'patient' => $patient,
-            'anamnesis' => $patient->anamnesis->first()
-        ]);
+        //
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Report extends Model
 {
@@ -12,12 +13,22 @@ class Report extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'file'
+        'name', 'file', 'user_id', 'hash'
     ];
 
-    public function anamnesis()
+    public function user()
     {
-        return $this->belongsTo('App\Anamnesis');
+        return $this->belongsTo('App\User');
     }
 
+    public function getUrl()
+    {
+        $user = $this->user;
+
+        if (!$user->patientdata) {
+            return false;
+        }
+
+        return asset('storage/' . $user->patientdata->firstname . '_' . $user->patientdata->lastname . '/' . $this->hash);
+    }
 }

@@ -41,4 +41,9 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract
     {
         return $this->hasMany('App\Anamnesis');
     }
+
+    public function reports()
+    {
+        return $this->hasMany('App\Report');
+    }
 }
