@@ -1,0 +1,18 @@
+ul.patientdata {
+	list-style: none;
+	padding: 0;
+}
+
+ul.patientdata > li {
+	padding: 10px 0;
+	border-bottom: 1px solid lightgrey;
+}
+
+.logo img {
+	max-width: 100%;
+}
+
+.imgzentriert {
+ 
+text-align: center;
+}
